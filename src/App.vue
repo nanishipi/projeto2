@@ -6,8 +6,16 @@
       <router-link to="/Login">Login</router-link> |
       <router-link to="/Perfil">Perfil</router-link> |
       <router-link to="/Admin">Admin</router-link> |
-      <router-link to="/Entrevistas">Entrevistas</router-link> |
-      <router-link to="/Propostas">Propostas</router-link> 
+      <router-link to="/AprovarPropostas">Aprovar Propostas</router-link> |
+      <router-link to="/Forum">Forum</router-link> |
+      <router-link to="/Register">Register</router-link> |
+      <router-link to="/MinhasPropostas">Minhas Propostas</router-link> |
+      <router-link to="/LandingPage">LandingPage</router-link> |
+      <router-link to="/EditarUser">Editar User</router-link> |
+      <router-link to="/DetalhesProposta">Detalhes Proposta</router-link> |
+      <router-link to="/CriarProposta">Criar Proposta</router-link> |
+      <router-link to="/AprovarPropostas">Aprovar Propostas</router-link> |
+      <router-link to="/EditarProposta">Editar Proposta</router-link> 
     </div>
     <router-view/>
   </div>

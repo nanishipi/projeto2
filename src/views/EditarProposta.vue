@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <h1>This is an propostas page</h1>
+      <h1>This is an Editar Proposta page</h1>
   </div>
 </template>
 

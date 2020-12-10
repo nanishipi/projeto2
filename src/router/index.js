@@ -4,9 +4,16 @@ import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
 import Login from '../views/Login.vue'
 import Perfil from '../views/Perfil.vue'
-import Propostas from '../views/Propostas.vue'
 import Entrevistas from '../views/Entrevistas.vue'
-
+import AprovarPropostas from '../views/AprovarPropostas.vue'
+import CriarProposta from '../views/CriarProposta.vue'
+import DetalhesProposta from '../views/DetalhesProposta.vue'
+import EditarProposta from '../views/EditarProposta.vue'
+import EditarUser from '../views/EditarUser.vue'
+import LandingPage from '../views/LandingPage.vue'
+import MinhasPropostas from '../views/MinhasPropostas.vue'
+import Register from '../views/Register.vue'
+import Forum from '../views/Forum.vue'
 
 
 
@@ -47,9 +54,49 @@ const routes = [
     component: Entrevistas
   },
   {
-    path: '/Propostas',
-    name: 'Propostas',
-    component: Propostas
+    path: '/AprovarPropostas',
+    name: 'AprovarPropostas',
+    component: AprovarPropostas
+  },
+  {
+    path: '/CriarProposta',
+    name: 'CriarProposta',
+    component: CriarProposta
+  },
+  {
+    path: '/DetalhesProposta',
+    name: 'DetalhesProposta',
+    component: DetalhesProposta
+  },
+  {
+    path: '/EditarUser',
+    name: 'EditarUser',
+    component: EditarUser
+  },
+  {
+    path: '/LandingPage',
+    name: 'LandingPage',
+    component: LandingPage
+  },
+  {
+    path: '/EditarProposta',
+    name: 'EditarProposta',
+    component: EditarProposta
+  },
+  {
+    path: '/MinhasPropostas',
+    name: 'MinhasPropostas',
+    component: MinhasPropostas
+  },
+  {
+    path: '/Register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/Forum',
+    name: 'Forum',
+    component: Forum
   },
 ]
 
