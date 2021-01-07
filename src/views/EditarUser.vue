@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="editUserPage">
       <h1 id="title">Editar Utilizador</h1>
-      <div class="d-flex justify-content-center">
+      <div>
         <b-form @submit.prevent='editUser'>
-          <b-row>
-            <b-col class="align-content-center">
+          <b-row align-h="start">
+            <b-col class="align-content-center" cols="2">
               <label for="txtUserName">Nome</label><br>
               <input class="input" type="text" id="txtUserName" required><br>
 
@@ -12,7 +12,7 @@
               <input class="input" type="email" id="txtEmail" required><br>
             </b-col>
 
-            <b-col class="align-content-center">
+            <b-col class="align-content-center" cols="2">
               <label for="txtUserNumber">Número</label><br>
               <input class="input" type="number" id="txtUserNumber" required><br>
             
