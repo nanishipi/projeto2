@@ -6,33 +6,33 @@
     <ul class="lisst-unstyled components">
       <p>The Providers</p>
       <li class="active">
-        <router-link to="/">Home</router-link> |
-        <router-link :to="{ name: 'about' }">About</router-link> |
-        <router-link :to="{ name: 'login' }">Login</router-link> |
-        <router-link :to="{ name: 'profile' }">Perfil</router-link> |
-        <router-link :to="{ name: 'admin' }">Admin</router-link> |
+        <router-link to="/">Home</router-link> 
+        <router-link :to="{ name: 'about' }">About</router-link> 
+        <router-link :to="{ name: 'login' }">Login</router-link> 
+        <router-link :to="{ name: 'profile' }">Perfil</router-link> 
+        <router-link :to="{ name: 'admin' }">Admin</router-link> 
         <router-link :to="{ name: 'aproveProposals' }"
           >Aprovar Propostas</router-link
         >
-        | <router-link :to="{ name: 'forum' }">Forum</router-link> |
-        <router-link :to="{ name: 'register' }">Register</router-link> |
+        <router-link :to="{ name: 'forum' }">Forum</router-link> 
+        <router-link :to="{ name: 'register' }">Register</router-link> 
         <router-link :to="{ name: 'myProposals' }"
           >Minhas Propostas</router-link
         >
-        | <router-link :to="{ name: 'landingpage' }">LandingPage</router-link> |
-        <router-link :to="{ name: 'userEdit' }">Editar User</router-link> |
+        <router-link :to="{ name: 'landingpage' }">LandingPage</router-link> 
+        <router-link :to="{ name: 'userEdit' }">Editar User</router-link> 
         <router-link :to="{ name: 'proposalDetails' }"
           >Detalhes Proposta</router-link
         >
-        |
+        
         <router-link :to="{ name: 'createProposal' }"
           >Criar Proposta</router-link
         >
-        |
+        
         <router-link :to="{ name: 'aproveProposals' }"
           >Aprovar Propostas</router-link
         >
-        |
+        
         <router-link :to="{ name: 'editarProposta' }"
           >Editar Proposta</router-link
         >
