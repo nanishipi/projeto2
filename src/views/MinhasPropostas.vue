@@ -1,12 +1,13 @@
 <template>
-  <div id="app">
-      <h1>This is an Minhas Propostas page</h1>
+  <div>
+      fdvgdfgdfgfdgdfgfd
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  name: "MinhasPropostas.vue",
 }
 </script>
 

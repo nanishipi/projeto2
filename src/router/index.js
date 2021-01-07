@@ -26,76 +26,76 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/sobre',
+    name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/Admin',
-    name: 'Admin',
+    path: '/admin',
+    name: 'admin',
     component: Admin
   },
   {
     path: '/Login',
-    name: 'Login',
+    name: 'login',
     component: Login
   },
   {
     path: '/Perfil',
-    name: 'Perfil',
+    name: 'profile',
     component: Perfil
   },
   {
     path: '/Entrevistas',
-    name: 'Entrevistas',
+    name: 'interview',
     component: Entrevistas
   },
   {
     path: '/AprovarPropostas',
-    name: 'AprovarPropostas',
+    name: 'aproveProposals',
     component: AprovarPropostas
   },
   {
     path: '/CriarProposta',
-    name: 'CriarProposta',
+    name: 'createProposal',
     component: CriarProposta
   },
   {
     path: '/DetalhesProposta',
-    name: 'DetalhesProposta',
+    name: 'proposalDetails',
     component: DetalhesProposta
   },
   {
     path: '/EditarUser',
-    name: 'EditarUser',
+    name: 'userEdit',
     component: EditarUser
   },
   {
     path: '/LandingPage',
-    name: 'LandingPage',
+    name: 'landingpage',
     component: LandingPage
   },
   {
     path: '/EditarProposta',
-    name: 'EditarProposta',
+    name: 'editarProposta',
     component: EditarProposta
   },
   {
     path: '/MinhasPropostas',
-    name: 'MinhasPropostas',
+    name: 'myProposals',
     component: MinhasPropostas
   },
   {
-    path: '/Register',
-    name: 'Register',
+    path: '/registar',
+    name: 'register',
     component: Register
   },
   {
     path: '/Forum',
-    name: 'Forum',
+    name: 'forum',
     component: Forum
   },
 ]

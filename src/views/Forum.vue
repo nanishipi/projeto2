@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
-      <h1>This is an Forum page</h1>
+  <div>
+    jnvjfdvnjfdnvjfdnvjfndvjfnvjdf
   </div>
 </template>
 
 <script>
-export default {
 
-}
 </script>
 
 <style>
-
+#col1{
+  background-color: blueviolet;
+}
 </style>
