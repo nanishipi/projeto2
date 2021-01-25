@@ -3,6 +3,11 @@
     <div id="form" class="mt-3">
       <b-form @submit="onSubmit">
         <b-container>
+          <div v-if="error != ''">
+            <warning message="Proposta já criada!" />
+          </div>
+             <p v-if="comp == 'estagio'" class="stepInfo"><span class="step">Passo 1</span> / <span class="step">Passo 2</span> / <span>Passo 3</span> </p>
+             <p v-else class="stepInfo"><span class="step">Passo 1</span> / <span class="step">Passo 2</span></p>
           <b-row>
             <b-col sm="12" lg="6">
               <b-form-group
@@ -75,7 +80,7 @@
             </b-col>
             <b-col
               ><div class="text-right mt-5">
-                <b-button id="sumbitBtn" type="Submit">{{ avancar }}</b-button>
+                <b-button id="sumbitBtn" type="Submit">{{ comp == 'estagio' ? "Seguinte" : "Concluir" }}</b-button>
               </div></b-col
             >
           </b-row>
@@ -86,12 +91,16 @@
 </template>
 
 <script>
+import warning from '../warning.vue'
 export default {
   name: "step_two",
+  components:{
+    warning
+  },
   data() {
     return {
-      estagio: this.$parent.$data.estagio,
-      avancar: this.$parent.$data.estagio ? "Seguinte" : "Concluir",
+      //estagio: this.$parent.$data.estagio,
+      error:"",
       form: {
         dados_relevantes: this.$parent.$data.form_proposta.dados_relevantes,
         recursos: this.$parent.$data.form_proposta.recursos,
@@ -105,23 +114,40 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
       this.$parent.$data.form_proposta.dados_relevantes = this.form.dados_relevantes;
       this.$parent.$data.form_proposta.recursos = this.form.recursos;
       this.$parent.$data.form_proposta.plano = this.form.plano;
-      if (this.estagio) {
+      if (this.comp == "estagio") {
         //avança para o prox passo
         this.$parent.$data.steps++;
       } else {
-        //submeter proposta concluir proposta emitir ao elemento pai (criarProposta.vue) o evento para submeter à BD
+        try {
+          this.$parent.$data.form_proposta.tipo = "projeto"
+          this.$parent.$data.form_proposta.icon = "file-earmark-code"
+          this.$store.dispatch("registerProposal", this.$parent.$data.form_proposta);
+          this.$router.push({name:'myProposals'})
+      } catch (error) {
+
+        this.error = error
+      }
       }
     },
   },
+  computed:{
+    comp(){
+      return this.$route.params.type
+    }
+  }
 };
 </script>
 <style scoped>
 .page {
   background-color: #f5f5f5;
+}
+.input {
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 2px #e6e6e6;
+  border: none;
 }
 #sumbitBtn {
   background-color: #0077b6;
@@ -131,5 +157,11 @@ export default {
   font-weight: lighter;
   font-size: 22px;
   border: none;
+}
+.stepInfo{
+  font-size: 79%;
+}
+.step{
+  border-bottom: 1px solid #C94514;
 }
 </style>

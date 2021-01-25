@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
 import Login from '../views/Login.vue'
 import Perfil from '../views/Perfil.vue'
@@ -14,16 +14,20 @@ import LandingPage from '../views/LandingPage.vue'
 import MinhasPropostas from '../views/MinhasPropostas.vue'
 import Register from '../views/Register.vue'
 import Forum from '../views/Forum.vue'
-
+import Store from '../store'
+import Dashboard from '../views/DashBoard.vue'
+import EditarPerfil from '../views/EditarPerfil.vue'
+import Forum_assunto from '../views/Forum_assunto.vue'
 
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'login',
+    component: Login
   },
   {
     path: '/sobre',
@@ -36,7 +40,10 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component: Admin
+    component: Admin,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/Login',
@@ -46,32 +53,50 @@ const routes = [
   {
     path: '/Perfil',
     name: 'profile',
-    component: Perfil
+    component: Perfil,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/Entrevistas',
     name: 'interview',
-    component: Entrevistas
+    component: Entrevistas,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/AprovarPropostas',
     name: 'aproveProposals',
-    component: AprovarPropostas
+    component: AprovarPropostas,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: '/CriarProposta',
+    path: '/CriarProposta/:type',
     name: 'createProposal',
-    component: CriarProposta
+    component: CriarProposta,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: '/DetalhesProposta',
+    path: '/DetalhesProposta/:id',
     name: 'proposalDetails',
-    component: DetalhesProposta
+    component: DetalhesProposta,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/EditarUser',
     name: 'userEdit',
-    component: EditarUser
+    component: EditarUser,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/LandingPage',
@@ -81,12 +106,26 @@ const routes = [
   {
     path: '/EditarProposta',
     name: 'editarProposta',
-    component: EditarProposta
+    component: EditarProposta,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/MinhasPropostas',
     name: 'myProposals',
-    component: MinhasPropostas
+    component: MinhasPropostas,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/Dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/registar',
@@ -96,12 +135,36 @@ const routes = [
   {
     path: '/Forum',
     name: 'forum',
-    component: Forum
+    component: Forum,
+    meta: {
+      requiresAuth: true
+    }
   },
+  {
+    path: '/Forum_detalhes',
+    name: 'forum_detalhes',
+    component: Forum_assunto
+  },
+  {
+    path: '/EditarPerfil',
+    name: 'editarPerfil',
+    component: EditarPerfil,
+    meta: {
+      requiresAuth: true
+    }
+  }
 ]
 
 const router = new VueRouter({
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
+    next({ name: 'login' })
+  } else {
+    next();
+  }
+
+});
 
 export default router

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p id="title" v-if="estagio" class="ml-5">Criar Proposta Estágio</p>
+    <p id="title" v-if="comp == 'estagio'" class="ml-5">Criar Proposta Estágio</p>
     <p id="title" v-else class="ml-5">Criar Proposta Projeto</p>
 
     <step_one v-if="steps == 1" />
@@ -19,11 +19,14 @@ export default {
     step_two,
     step_three,
   },
+
   data() {
     return {
-      estagio: true,
       steps: 1,
       form_proposta: {
+        estado: "analise",
+        tipo: "",
+        icon: "",
         titulo: "",
         objetivos: "",
         resultados: "",
@@ -35,13 +38,15 @@ export default {
         email: "",
         cargo: "",
         contato: "",
+        id: this.$store.getters.getNextProposalId,
+        user: this.$store.getters.getLoggedUser.name,
       },
     };
   },
-  methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
+  methods: {},
+  computed: {
+    comp() {
+      return this.$route.params.type;
     },
   },
 };

@@ -3,7 +3,7 @@
     <b-col id="contentContainer" cols="12">
       <div id="forumTitle">
         <b-col cols="12">
-            <h3 class="TitlePage">Minhas Propostas</h3>
+            <h3 class="TitlePage">Propostas Aprovadas pela CCA</h3>
         </b-col>
       </div>
       <div>
@@ -13,8 +13,8 @@
             <b-col md="11">
               <b-input id="seacrhInput" v-model="search" type="text" placeholder="Search"></b-input>
               <br>
-              <div v-if="selectedOption != 'all' || selectedState != 'all'">
-                <p class="text">Filtros: <b-badge id="filterInfo">{{filterText}}</b-badge> <b-badge id="filterInfo">{{stateText}}</b-badge> <b-badge id="filterInfo">{{getProposals.length}} resultados</b-badge></p>
+              <div v-if="selectedOption != 'all'">
+                <p class="text">Filtros: <b-badge id="filterInfo">{{filterText}}</b-badge> <b-badge id="filterInfo">{{getProposals.length}} resultados</b-badge></p>
               </div>
             </b-col>
             <b-col id="filterButton" class="d-flex justify-content-end" md="1">
@@ -23,9 +23,6 @@
                     <li><a @click="allProposals" class="dropdown-item">Todas</a></li>
                     <li><a @click="filterProjeto" class="dropdown-item">Proposta Projeto</a></li>
                     <li><a @click="filterEstagio" class="dropdown-item">Proposta Estágio</a></li>
-                    <li><a @click="filterAprovado" class="dropdown-item">Propostas Aprovadas</a></li>
-                    <li><a @click="filterAnalise" class="dropdown-item">Propostas em Análise</a></li>
-                    <li><a @click="filterRevisao" class="dropdown-item">Propostas para revisão</a></li>
                 </ul>
             </b-col>
           </b-row>
@@ -58,8 +55,6 @@ export default {
   data(){
     return{
       selectedOption:"all",
-      selectedState: "all",
-      stateText: "Todas Propostas",
       filterText:"",
       search:""
     }
@@ -75,27 +70,12 @@ export default {
     },
     allProposals(){
       this.selectedOption = "all"
-      this.selectedState = "all"
-    },
-
-
-    filterAprovado(){
-      this.selectedState = "aprovado"
-      this.stateText = "Aprovadas"
-    },
-    filterAnalise(){
-      this.selectedState = "analise"
-      this.stateText = "Análise"
-    },
-    filterRevisao(){
-      this.selectedState = "revisao"
-      this.stateText = "Revisão"
     }
   },
   computed:{
     getProposals(){
-      return this.$store.getters.getFilterdProposals(this.selectedOption, this.search).filter(proposal=>proposal.user==this.$store.getters.getLoggedUser.name).filter(proposal => proposal.estado == this.selectedState || this.selectedState == "all")
-    }
+        return this.$store.getters.getFilterdProposals(this.selectedOption, this.search).filter(proposal=>proposal.estado=="aprovado");
+    },
   },
 }
 </script>

@@ -3,13 +3,15 @@
     <div id="form" class="mt-3">
       <b-form @submit="onSubmit">
         <b-container>
+            <p v-if="comp == 'estagio'" class="stepInfo"><span class="step">Passo 1</span> / <span>Passo 2</span> / <span>Passo 3</span> </p>
+            <p v-else class="stepInfo"><span class="step">Passo 1</span> / <span>Passo 2</span></p>
           <b-row>
             <b-col cols="12">
               <b-form-group
                 id="input-group-1"
                 label="Título"
                 label-for="input-1"
-                class="mb-5"
+                class="mb-3"
               >
                 <b-form-input
                   id="input-1"
@@ -82,7 +84,7 @@ export default {
   name: "step_one",
   data() {
     return {
-      estagio: this.$parent.$data.estagio,
+      //estagio: this.$parent.$data.estagio,
       form: {
         titulo: this.$parent.$data.form_proposta.titulo,
         objetivos: this.$parent.$data.form_proposta.objetivos,
@@ -93,13 +95,17 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
       this.$parent.$data.steps++;
       this.$parent.$data.form_proposta.titulo = this.form.titulo;
       this.$parent.$data.form_proposta.objetivos = this.form.objetivos;
       this.$parent.$data.form_proposta.resultados = this.form.resultados;
     },
   },
+  computed:{
+    comp() {
+      return this.$route.params.type;
+    },
+  }
 };
 </script>
 <style scoped>
@@ -120,4 +126,11 @@ export default {
   font-size: 22px;
   border: none;
 }
+.stepInfo{
+  font-size: 79%;
+}
+.step{
+  border-bottom: 1px solid #C94514;
+}
+
 </style>

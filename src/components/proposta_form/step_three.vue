@@ -1,8 +1,12 @@
 <template>
   <div class="page">
     <div id="form" class="mt-3">
-      <b-form @submit="onSubmit">
+      <b-form @submit="registerProposal">
         <b-container>
+          <div v-if="error != ''">
+            <warning message="Proposta já criada!" />
+          </div>
+            <p v-if="comp == 'estagio'" class="stepInfo"><span class="step">Passo 1</span> / <span class="step">Passo 2</span> / <span class="step">Passo 3</span> </p>
           <b-row>
             <b-col cols="11">
               <b-form-group
@@ -125,11 +129,16 @@
   </div>
 </template>
 <script>
+import warning from '../warning.vue'
 export default {
   name: "step_three",
+  components:{
+    warning
+  },
   data() {
     return {
-      estagio: this.$parent.$data.estagio,
+      error:"",
+      //estagio: this.$parent.$data.estagio,
       entidades: [
         { value: null, text: "Selecione uma opção" },
         { value: 1, text: "Empresa machado" },
@@ -152,25 +161,54 @@ export default {
       this.$parent.$data.form_proposta.contato = this.form.contato;
       this.$parent.$data.steps--;
     },
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-      //concluir proposta emitir ao elemento pai (criarProposta.vue) o evento para submeter à BD
+    registerProposal() {
+      try {
+        this.$parent.$data.form_proposta.entidade = this.form.entidade;
+        this.$parent.$data.form_proposta.tutor = this.form.tutor;
+        this.$parent.$data.form_proposta.email = this.form.email;
+        this.$parent.$data.form_proposta.cargo = this.form.cargo;
+        this.$parent.$data.form_proposta.contato = this.form.contato;
+        this.$parent.$data.form_proposta.tipo = "estagio"
+        this.$parent.$data.form_proposta.icon = "building"
+        this.$store.dispatch(
+          "registerProposal",
+          this.$parent.$data.form_proposta
+        );
+        
+        this.$router.push({name:"myProposals"});
+      } catch (error) {
+        this.error = error
+      }
     },
   },
+  computed:{
+    comp() {
+      return this.$route.params.type;
+    },
+  }
 };
 </script>
 <style scoped>
 .page {
   background-color: #f5f5f5;
 }
-#sumbitBtn {
-  background-color: #0077b6;
-  width: 269px;
-  height: 48px;
-  border-radius: 18px;
-  font-weight: lighter;
-  font-size: 22px;
+.input {
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 2px #e6e6e6;
   border: none;
 }
+#sumbitBtn {
+  background-color: #0077b6;
+  width: 200px;
+  border-radius: 18px;
+  font-weight: lighter;
+  border: none;
+}
+.stepInfo{
+  font-size: 79%;
+}
+.step{
+  border-bottom: 1px solid #C94514;
+}
+
 </style>
