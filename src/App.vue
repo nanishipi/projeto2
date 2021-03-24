@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-container fluid>
+    <b-container id="containerApp" fluid>
       <div v-if="isLoginRegister">
         <div v-if="isPage">
             <LoginBar/>
@@ -47,5 +47,8 @@ export default {
 <style scoped>
 #app{
   background-color: #F5F5F5;
+}
+#containerApp{
+  padding: 0;
 }
 </style>
