@@ -27,39 +27,12 @@
         </b-row>
         <b-row>
           <b-col class="mt-3">
-            <b-table-simple class="table input" borderless hover>
-              <b-tr class="head">
-                <b-th class="text-center">Nome</b-th>
-                <b-th class="text-center">Número</b-th>
-                <b-th class="text-center">Email</b-th>
-                <b-th class="text-center">Cargo</b-th>
-                <b-th class="text-center">Ações</b-th>
-              </b-tr>
-              <b-tr
-                v-for="user in users"
-                :key="user.id"
-                class="text-center tabledata"
-              >
-                <b-td>{{ user.name }}</b-td>
-                <b-td>{{ user.numero }}</b-td>
-                <b-td>{{ user.email }}</b-td>
-                <b-td>{{ user.selected }}</b-td>
-                <b-td>
-                  <b-button
-                    class="btn_edit"
-                    variant="#0077B6"
-                    font-color="#0077B6"
-                    @click="edit()"
-                    ><b-icon-pencil-square
-                      class="btn mr-4"
-                      style="width: 23px; height: 23px"
-                  /></b-button>
-                  <b-button id="remove" class="btn" @click="remove()"
-                    ><b-icon-trash-fill style="width: 23px; height: 23px" />
-                  </b-button>
-                </b-td>
-              </b-tr>
-            </b-table-simple>
+            <div v-if="windSize <= 992">
+              <mobileUserCard v-for="user in users" :key="user.id" :propUser="user"/>
+            </div>
+            <div v-else>
+              <desktopUserTable/>
+            </div>  
           </b-col>
         </b-row>
       </b-col>
@@ -68,7 +41,13 @@
 </template>
 
 <script>
+import mobileUserCard from '../components/mobileUserCard.vue'
+import desktopUserTable from '../components/desktopUserTable.vue'
 export default {
+   components:{
+    mobileUserCard,
+    desktopUserTable
+  },
   data() {
     return {
       search: "",
@@ -80,13 +59,26 @@ export default {
         { value: 3, text: "CCA" },
         { value: 4, text: "Entidade Externa" },
       ],
-      users: this.$store.getters.getUsers
+      users: this.$store.getters.getUsers,
+      windSize: window.innerWidth
     };
+  },
+  created() {
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.myEventHandler);
   },
   methods: {
     edit() {},
     remove() {},
+    myEventHandler() {
+      this.windSize = window.innerWidth
+    }
   },
+  computed:{
+
+  }
 };
 </script>
 
@@ -100,16 +92,9 @@ export default {
   font-size: 17px;
 }
 #remove {
-  color: #dc3545;
-  background-color: white;
-  border: none;
-}
-
-.btn {
   color: #0077b6;
   background-color: white;
   border: none;
-  padding: 0px;
 }
 
 .head {
