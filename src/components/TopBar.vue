@@ -5,11 +5,15 @@
 
       <div id="backNotButton" class="d-flex justify-content-end">
         <b-button
+          @click="diposeNotificationBadge"
           v-b-modal.notificationModal
           id="roundBackNotification"
           variant="light"
           ><b-icon icon="bell" aria-hidden="true"></b-icon
-        ></b-button>
+        >
+          <div v-if="seenNotification == false" class="icon-badge">{{getNotification.length}}</div>
+          
+        </b-button>
       </div>
       <div>
         <div>
@@ -20,7 +24,7 @@
                   <p id="title">Notificações</p>
                 </b-col>
                 <b-col class="d-flex justify-content-end" md="6">
-                   <b-button variant="light" class="closeModal">X</b-button>
+                   <b-button @click="$bvModal.hide('notificationModal')" variant="light" class="closeModal">X</b-button>
                 </b-col>
               </b-row>
             </b-col>
@@ -86,6 +90,11 @@ export default {
   components: {
     //warning
   },
+  data(){
+    return{
+      seenNotification: false,
+    }
+  },
   computed: {
     getUserName() {
       return this.$store.getters.getLoggedUser.name;
@@ -98,6 +107,12 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
+    dispose(){
+      this.$bvModal.hide()
+    },
+    diposeNotificationBadge(){
+      this.seenNotification = true
+    }
   },
 };
 </script>
@@ -113,6 +128,18 @@ export default {
   font-size: 19px;
   width: 49px;
   height: 49px;
+}
+.icon-badge {
+    background-color: red;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    width:20px;
+    height:20px;
+    border-radius: 100%;
+    position: relative;
+    top: -43px;
+    left: 23px; /* changed */
 }
 .userPhoto{
   border-radius: 999px;
